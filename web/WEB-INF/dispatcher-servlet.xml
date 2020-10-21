@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--基于注解的DI默认是关闭的，需要如下方式开启-->
+    <context:annotation-config/>
+    <context:component-scan base-package="com.sleepy.zeo.controller"/>
+
+    <!--配置视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/static/html/"/>
+        <property name="suffix" value=".html"/>
+    </bean>
+
+    <!--配置访问静态资源-->
+    <mvc:default-servlet-handler/>
+    <!--
+        框架会注册RequestMappingHandlerMapping和RequestMappingHandlerAdapter用于处理@RequestMapping
+
+        3) 前端控制器(DispatcherServlet)找到处理器映射器(HandlerMapping)，由处理器映射器通过url找到对应的处理器(Handler，也即Controller)，返回处理器执行链(HandlerInterceptor... Handler)给前端控制器
+        4) 前端控制器请求处理器适配器(HandlerAdapter)执行处理器，然后处理器返回一个ModelAndView给前端控制器
+        5) 前端控制器调用视图解析器(ViewResolver)解析返回的视图...
+    -->
+    <mvc:annotation-driven/>
+
+</beans>
