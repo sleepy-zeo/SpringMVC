@@ -678,12 +678,14 @@ public abstract class HttpServlet extends GenericServlet
         throws ServletException, IOException
     {
         String method = req.getMethod();
+        // Step-HANDLE-3. 根据method确定调用的函数，下面以doGet为例分析
 
         if (method.equals(METHOD_GET)) {
             long lastModified = getLastModified(req);
             if (lastModified == -1) {
                 // servlet doesn't support if-modified-since, no reason
                 // to go through further expensive logic
+                // Step-HANDLE-4. doGet，实际调用的是FrameworkServlet::doGet
                 doGet(req, resp);
             } else {
                 long ifModifiedSince = req.getDateHeader(HEADER_IFMODSINCE);

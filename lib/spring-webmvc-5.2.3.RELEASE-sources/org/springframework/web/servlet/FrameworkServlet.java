@@ -869,17 +869,21 @@ public abstract class FrameworkServlet extends HttpServletBean implements Applic
 
 
 	/**
+	 * Servlet的核心方法
+	 *
 	 * Override the parent class implementation in order to intercept PATCH requests.
 	 */
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		// Step-HANDLE-1. FrameoworkServlet::service
 		HttpMethod httpMethod = HttpMethod.resolve(request.getMethod());
 		if (httpMethod == HttpMethod.PATCH || httpMethod == null) {
 			processRequest(request, response);
 		}
 		else {
+			// Step-HANDLE-2. super.service，跳转到HttpServlet::service
 			super.service(request, response);
 		}
 	}
@@ -895,6 +899,7 @@ public abstract class FrameworkServlet extends HttpServletBean implements Applic
 	protected final void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		// Step-HANDLE-5. 直接调用processRequest函数
 		processRequest(request, response);
 	}
 
@@ -1003,6 +1008,7 @@ public abstract class FrameworkServlet extends HttpServletBean implements Applic
 		initContextHolders(request, localeContext, requestAttributes);
 
 		try {
+			// Step-HANDLE-6. processRequest的核心是doService函数，调用的是DispatcherServlet::doService
 			doService(request, response);
 		}
 		catch (ServletException | IOException ex) {
