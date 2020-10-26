@@ -2,4 +2,7 @@
 build
 out
 target
+
+.DS_Store
+
 *.iml
