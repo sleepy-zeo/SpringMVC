@@ -31,10 +31,18 @@
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+    <!-- 单独配置某些文件，详见dispatcher-servlet.xml中对mvc:default-servlet-handler的说明 -->
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/static/favicon.ico</url-pattern>
+    </servlet-mapping>
 
     <!--
         字符编码过滤器
         只有字符编码过滤器的url要设置为/*，即拦截所有的请求，其他url-pattern都不需要这么设置
+
+        /是省却匹配，优先级最低
+        完全匹配 - 路径匹配(/* /sc/ 等等) - 扩展名匹配 - 省却匹配
     -->
     <filter>
         <filter-name>characterEncodingFilter</filter-name>
@@ -49,7 +57,19 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
-    <listener>
-        <listener-class>com.sleepy.zeo.session.SessionListener</listener-class>
-    </listener>
+    <!--
+        配置session cookie
+        session-timeout，以分钟为单位
+        cookie-config
+            name设置cookie的name
+            max-age，以秒为单位，-1表示浏览器关闭失效，0表示立即失效
+            ...
+    -->
+    <session-config>
+        <session-timeout>60</session-timeout>
+        <cookie-config>
+            <name>s-mvc-session</name>
+            <max-age>-1</max-age>
+        </cookie-config>
+    </session-config>
 </web-app>

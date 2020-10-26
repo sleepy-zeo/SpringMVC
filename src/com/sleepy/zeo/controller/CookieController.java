@@ -17,12 +17,14 @@ public class CookieController {
         return "cookie";
     }
 
+    // 方式一，获取request的cookie中属性值
     @RequestMapping("/display")
-    public String display(@CookieValue("JSESSIONID") String sessionId) {
+    public String display(@CookieValue("s-mvc-session") String sessionId) {
         System.out.println("sessionId: " + sessionId);
         return "cookie";
     }
 
+    // 方式二，获取request的cookie中属性值
     @RequestMapping("/display2")
     public String display2(HttpServletRequest request, HttpServletResponse response) {
         Cookie[] cookies = request.getCookies();
@@ -30,15 +32,12 @@ public class CookieController {
         String sessionId = "";
         if (cookies != null) {
             for (Cookie c : cookies) {
-                if ("JSESSIONID".equals(c.getName())) {
+                if ("s-mvc-session".equals(c.getName())) {
                     sessionId = c.getValue();
                 }
             }
         }
-
         System.out.println("sessionId: " + sessionId);
-        System.out.println(request.getSession().getAttribute("secret_serial"));
-
         return "cookie";
     }
 }

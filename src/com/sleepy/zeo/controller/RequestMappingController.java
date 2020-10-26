@@ -58,7 +58,7 @@ public class RequestMappingController {
     // consumes限制request的Content-Type类型
     // produces限制request的Accept类型，
     //      主要用于和request的Accept进行比对，如果request的Accept中不包含该类型，则请求失败，否则请求成功
-    //      至于返回的内容是否真的是produces指定类型则没有任何关系
+    //      如果请求成功，会把response的Content-Type设置为produces中的类型
     @RequestMapping(value = "/cp", consumes = "text/html", produces = "application/json")
     public void cp(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.getWriter().write("{\"name\":\"sleepy\", \"age\":26}");

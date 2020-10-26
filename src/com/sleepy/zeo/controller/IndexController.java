@@ -10,4 +10,9 @@ public class IndexController {
     public String index() {
         return "index";
     }
+
+    @RequestMapping("/favicon.ico")
+    public String favicon() {
+        return "forward:/static/favicon.ico";
+    }
 }

@@ -14,7 +14,16 @@
         <property name="suffix" value=".html"/>
     </bean>
 
-    <!-- 配置访问静态资源 -->
+    <!--
+        配置访问静态资源
+        即可以访问web目录下除WEB-INF文件夹下的任意资源文件，注意有些格式的文件可能不支持
+
+        对于不支持的格式，可以单独在web.xml配置
+        <servlet-mapping>
+	        <servlet-name>default</servlet-name>
+	        <url-pattern>/static/favicon.ico</url-pattern>
+        </servlet-mapping>
+    -->
     <mvc:default-servlet-handler/>
     <!--
         框架会注册RequestMappingHandlerMapping和RequestMappingHandlerAdapter用于处理@RequestMapping
@@ -23,6 +32,18 @@
         4) 前端控制器请求处理器适配器(HandlerAdapter)执行处理器，然后处理器返回一个ModelAndView给前端控制器
         5) 前端控制器调用视图解析器(ViewResolver)解析返回的视图...
     -->
-    <mvc:annotation-driven/>
+    <mvc:annotation-driven>
+        <mvc:message-converters register-defaults="false">
+            <bean id="fastJsonHttpMessageConverter" class="com.sleepy.zeo.converter.JsonHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <!-- 防止IE下会出现下载提示 -->
+                        <value>text/html;charset=UTF-8</value>
+                        <value>application/json;charset=UTF-8</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
 
 </beans>
