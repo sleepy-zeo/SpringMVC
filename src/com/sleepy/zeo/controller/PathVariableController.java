@@ -29,6 +29,7 @@ public class PathVariableController {
     /**
      * PathVariable
      * 将url中的占位符绑定到控制器处理方法的参数中
+     * 默认是丢掉最后一个.及后面的字符，可以通过{username:.*}里的:.*获取整个参数
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     @ResponseBody

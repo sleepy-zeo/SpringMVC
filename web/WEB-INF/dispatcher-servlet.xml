@@ -46,4 +46,13 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
+    <!-- 文件上传解析器，必须配置id，且名称必须为multipartResolver -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!--
+            文件上传大小，单位为字节
+            这里设置为10GB大小
+        -->
+        <property name="maxUploadSize" value="10240000000"/>
+    </bean>
+
 </beans>
