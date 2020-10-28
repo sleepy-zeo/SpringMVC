@@ -72,4 +72,10 @@
             <max-age>-1</max-age>
         </cookie-config>
     </session-config>
+
+    <!-- 处理http错误码 -->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/static/html/404.html</location>
+    </error-page>
 </web-app>

@@ -7,6 +7,7 @@
     <!-- 基于注解的DI默认是关闭的，需要如下方式开启 -->
     <context:annotation-config/>
     <context:component-scan base-package="com.sleepy.zeo.controller"/>
+    <context:component-scan base-package="com.sleepy.zeo.exception_resolver"/>
 
     <!-- 配置视图解析器 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -54,5 +55,21 @@
         -->
         <property name="maxUploadSize" value="10240000000"/>
     </bean>
+
+    <mvc:interceptors>
+        <!-- 配置2个拦截器 -->
+        <mvc:interceptor>
+            <mvc:mapping path="/ip/**"/>
+            <bean class="com.sleepy.zeo.interceptor.ICInterceptor1"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/ip/**"/>
+            <bean class="com.sleepy.zeo.interceptor.ICInterceptor2"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/ip/**"/>
+            <bean class="com.sleepy.zeo.interceptor.ICInterceptor3"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
 </beans>

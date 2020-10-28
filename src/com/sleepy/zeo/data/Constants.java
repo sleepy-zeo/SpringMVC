@@ -8,6 +8,8 @@ public class Constants {
     public static final String UPLOAD_DIR = "s-mvc-upload";
     public static final String DOWNLOAD_DIR = "s-mvc-upload";
 
+    public static final String CATALINA_MIME_BOUNDARY="CATALINA_MIME_BOUNDARY";
+
     public static final String HTTP_HEADER_CONTENT_TYPE_KEY = "Content-Type";
     public static final String HTTP_HEADER_CONTENT_LENGTH_KEY = "Content-Length";
     public static final String HTTP_HEADER_RANGE_KEY = "Range";
@@ -20,5 +22,6 @@ public class Constants {
     public static final int HTTP_CODE_OK = SC_OK;
     public static final int HTTP_CODE_PARTIAL_CONTENT = SC_PARTIAL_CONTENT;
     public static final int HTTP_CODE_REQUESTED_RANGE_NOT_SATISFIABLE = SC_REQUESTED_RANGE_NOT_SATISFIABLE;
+    public static final int HTTP_CODE_NOT_FOUND = SC_NOT_FOUND;
 
 }
