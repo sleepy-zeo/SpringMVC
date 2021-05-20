@@ -59,15 +59,15 @@
     <mvc:interceptors>
         <!-- 配置2个拦截器 -->
         <mvc:interceptor>
-            <mvc:mapping path="/ip/**"/>
+            <mvc:mapping path="/**"/>
             <bean class="com.sleepy.zeo.interceptor.ICInterceptor1"/>
         </mvc:interceptor>
         <mvc:interceptor>
-            <mvc:mapping path="/ip/**"/>
+            <mvc:mapping path="/**"/>
             <bean class="com.sleepy.zeo.interceptor.ICInterceptor2"/>
         </mvc:interceptor>
         <mvc:interceptor>
-            <mvc:mapping path="/ip/**"/>
+            <mvc:mapping path="/**"/>
             <bean class="com.sleepy.zeo.interceptor.ICInterceptor3"/>
         </mvc:interceptor>
     </mvc:interceptors>

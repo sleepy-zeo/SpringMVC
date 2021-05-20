@@ -10,6 +10,7 @@ public class ApplicationTest {
         System.out.println(values[0]);
         System.out.println(values[1]);
 
+        System.out.println("abcd/abc".substring(5));
 
 
     }

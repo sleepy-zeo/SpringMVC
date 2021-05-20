@@ -11,7 +11,7 @@
         2) servlet-class的配置信息由xxx-servlet.xml配置文件指定
     -->
     <servlet>
-        <servlet-name>dispatcher</servlet-name>
+        <servlet-name>lullaby-dispatcher</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <!--
             前端控制器的加载路径
@@ -28,7 +28,7 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
-        <servlet-name>dispatcher</servlet-name>
+        <servlet-name>lullaby-dispatcher</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
     <!-- 单独配置某些文件，详见dispatcher-servlet.xml中对mvc:default-servlet-handler的说明 -->
@@ -37,12 +37,9 @@
         <url-pattern>/static/favicon.ico</url-pattern>
     </servlet-mapping>
 
-    <!--
-        字符编码过滤器
-        只有字符编码过滤器的url要设置为/*，即拦截所有的请求，其他url-pattern都不需要这么设置
-
-        /是省却匹配，优先级最低
-        完全匹配 - 路径匹配(/* /sc/ 等等) - 扩展名匹配 - 省却匹配
+    <!-- 过滤器
+        request到达dispatcherServlet前，首先要经过过滤器链，如果过滤器链直接过滤掉，请求就不会传递到dispatcherServlet中了
+        request经过所有符合条件的过滤器后才会传递到dispatcherServlet中
     -->
     <filter>
         <filter-name>characterEncodingFilter</filter-name>
@@ -55,6 +52,30 @@
     <filter-mapping>
         <filter-name>characterEncodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>oneFilter</filter-name>
+        <filter-class>com.sleepy.zeo.filters.ScnFilterOne</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>oneFilter</filter-name>
+        <url-pattern>/one/*</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>twoFilter</filter-name>
+        <filter-class>com.sleepy.zeo.filters.ScnFilterTwo</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>twoFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>threeFilter</filter-name>
+        <filter-class>com.sleepy.zeo.filters.ScnFilterThree</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>threeFilter</filter-name>
+        <url-pattern>/three</url-pattern>
     </filter-mapping>
 
     <!--
